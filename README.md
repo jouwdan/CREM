@@ -17,7 +17,8 @@ My proposal for tools, technologies and equipment for this project is as follows
 
 - NodeJS (web front end)
 - Lua (to program ESP32 modules)
-- Python (to read MQTT & save to file)
+- Python (for MQTT client using micropython & for the broker for MQTT)
+- Mosquitto (for the MQTT server)
 - Express
 - Handlebars
 - JSON files for storage of sensor data
