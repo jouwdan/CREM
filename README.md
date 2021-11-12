@@ -15,8 +15,7 @@ My proposal for tools, technologies and equipment for this project is as follows
 
 #### Technologies
 
-- [MicroPython](https://github.com/micropython/micropython)
-- Python
+- Python / [MicroPython](https://github.com/micropython/micropython)
 - Mosquitto
 - NodeJS
 - Express
