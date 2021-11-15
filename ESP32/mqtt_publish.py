@@ -20,13 +20,13 @@ def get_readings():
     TOPIC = b'CREM_Sensor'
     client = MQTTClient(CLIENT_ID, SERVER)
     client.connect()
-    sensor = DHT22(Pin(15, Pin.IN, Pin.PULL_UP))
+    sensor = DHT22(Pin(4, Pin.IN, Pin.PULL_UP))
     while True:
         try:
             sensor.measure()
             temp = sensor.temperature()
             humidity = sensor.humidity()
-            reading = (b'{0:3.1f},{1:3.1f}'.format(t, h))
+            reading = (b'{0:3.1f},{1:3.1f}'.format(temp, humidity))
             client.publish(TOPIC, reading)
             print(reading)
         except OSError:
