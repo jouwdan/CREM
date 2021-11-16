@@ -15,7 +15,7 @@ def do_connect():
     print('network config:', wlan.ifconfig())
 
 def get_readings():
-    CLIENT_ID = 'MDF1_Sensor'
+    CLIENT_ID = 'Sensor_Name'
     SERVER = 'raspberrypi.local'
     TOPIC = b'CREM_Sensor'
     client = MQTTClient(CLIENT_ID, SERVER)
