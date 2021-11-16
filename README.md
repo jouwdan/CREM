@@ -10,7 +10,7 @@ CREM, or Comms Room Environment Monitor, is an experimental website hosted on a 
 - [NodeJS](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
 - [Handlebars](https://handlebarsjs.com/)
-- JSON files for storage of sensor data
+- [MariaDB](https://mariadb.org)
 
 ## Hardware Used
 
