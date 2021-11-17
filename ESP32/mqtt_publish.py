@@ -9,15 +9,15 @@ def do_connect():
     wlan.active(True)
     if not wlan.isconnected():
         print('connecting to network...')
-        wlan.connect('Heffernan Network', 'Josephine')
+        wlan.connect('wifi-ssid', 'wifi-password')
         while not wlan.isconnected():
             pass
     print('network config:', wlan.ifconfig())
 
 def get_readings():
-    CLIENT_ID = 'MDF1'
+    CLIENT_ID = 'Sensor_Name'
     SERVER = 'raspberrypi.local'
-    TOPIC = b'MDF1'
+    TOPIC = b'CREM_Sensor'
     client = MQTTClient(CLIENT_ID, SERVER)
     client.connect()
     sensor = DHT22(Pin(4, Pin.IN, Pin.PULL_UP))
@@ -27,9 +27,8 @@ def get_readings():
             temp = sensor.temperature()
             humidity = sensor.humidity()
             reading = (b'{0:3.1f},{1:3.1f}'.format(temp, humidity))
-            print(reading)
             client.publish(TOPIC, reading)
-            print('Published Successfully')
+            print(reading)
         except OSError:
             print('Sensor reading failed')
         sleep(5)
