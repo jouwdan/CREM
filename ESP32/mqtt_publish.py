@@ -3,9 +3,11 @@ from umqtt.simple import MQTTClient
 from machine import Pin
 from dht import DHT22
 import network
+import ubinascii
+
+wlan = network.WLAN(network.STA_IF)
 
 def do_connect():
-    wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
     if not wlan.isconnected():
         print('connecting to network...')
@@ -15,7 +17,7 @@ def do_connect():
     print('network config:', wlan.ifconfig())
 
 def get_readings():
-    CLIENT_ID = 'MDF1'
+    CLIENT_ID = ubinascii.hexlify(wlan.config('mac'), ':')
     SERVER = 'raspberrypi.local'
     TOPIC = b'MDF1'
     client = MQTTClient(CLIENT_ID, SERVER)
