@@ -1,0 +1,27 @@
+<div class="navbar my-4 shadow-lg bg-neutral text-neutral-content rounded-box">
+  <div class="flex-1 px-2 mx-2">
+    <a id="home" class="btn btn-ghost rounded-btn" href='/'>CREM</a>
+  </div> 
+  <div class="flex-none hidden px-2 mx-2 lg:flex">
+    <div class="flex items-stretch">
+      {{#if loggedInUser}}
+      <a id="home" class="btn btn-ghost rounded-btn" href="/">Home</a> 
+      {{/if}}
+      {{#unless loggedInUser}}
+      <a id="register" class="btn btn-ghost rounded-btn" href="/register">Register</a> 
+      <a id="login" class="btn btn-ghost rounded-btn" href="/login">Log In</a> 
+      {{/unless}}
+      {{#if loggedInUser}}
+      <a id="account" class="btn btn-ghost rounded-btn" href="/account">My Account</a> 
+      {{/if}}
+      {{#if loggedInUser}}
+      <a id="logout" class="btn btn-ghost rounded-btn" href="/logout">Log Out</a> 
+      {{/if}}
+
+    </div>
+  </div> 
+</div>
+
+<script>
+  $("#{{id}}").addClass("active item");
+</script>

@@ -1,0 +1,38 @@
+{
+    "name": "crem-web",
+    "version": "0.0.1",
+    "description": "Web application of the Comms Room Environment Monitor project.",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cookie-parser": "^1.4.5",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "express-fileupload": "^1.2.1",
+        "express-handlebars": "^5.3.2",
+        "fs-extra": "^10.0.0",
+        "lodash": "^4.17.21",
+        "lowdb": "^1.0.0",
+        "mariadb": "^2.5.5",
+        "uuid": "^8.3.2",
+        "winston": "^3.3.3"
+    },
+    "repository": {
+        "url": "https://github.com/jordharr/CREM"
+    },
+    "license": "MIT",
+    "keywords": [
+        "node",
+        "express"
+    ],
+    "prettier": {
+        "singleQuote": false,
+        "printWidth": 120
+    },
+    "devDependencies": {
+        "prettier": "^2.3.0"
+    }
+}
