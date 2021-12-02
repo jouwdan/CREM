@@ -16,5 +16,6 @@ router.get("/dashboard", dashboard.index);
 
 router.post("/registration", account.registration);
 router.post("/authentication", account.authentication);
+router.post("/dashboard/addsensor", dashboard.addSensor);
 
 module.exports = router;

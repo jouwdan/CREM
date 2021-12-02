@@ -1,6 +1,12 @@
 {{> menu id="dashboard"}}
 
-
+{{#each sensors}}
 <section class="card bg-base-200 p-4 mb-4">
   
+</section>
+{{/each}}
+
+<section class="card bg-base-200 p-4 mb-4">
+  <h2 class="text text-xl">Add Sensor</h2>
+  {{> addsensor}}
 </section>

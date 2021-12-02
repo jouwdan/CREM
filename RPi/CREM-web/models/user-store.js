@@ -36,6 +36,17 @@ const userStore = {
     user.password = userContent.password;
     this.store.save();
   },
+
+  addSensor(loggedInUser, sensor) {
+    let user = this.store.findOneBy(this.collection, { id: loggedInUser })
+    user.sensors.push(sensor);
+    this.store.save();
+  },
+
+  getUserSensors(loggedInUser) {
+    let user = this.store.findOneBy(this.collection, { id: loggedInUser });
+    return user.sensors;
+  },
 };
 
 module.exports = userStore;

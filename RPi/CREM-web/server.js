@@ -25,11 +25,25 @@ app.set("view engine", ".hbs");
 const routes = require("./routes");
 app.use("/", routes);
 
-app.get('/api/:sensor', async (req, res) => {
+app.get('/api/:sensor/all', async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
     var query = "SELECT * FROM readings WHERE sensor = '" + req.params.sensor + "'";
+    var rows = await conn.query(query);
+    res.send(rows);
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) return conn.release();
+  }
+});
+
+app.get('/api/:sensor/latest', async (req, res) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    var query = "SELECT * FROM readings WHERE sensor = '" + req.params.sensor + "' ORDER BY readingid DESC LIMIT 1";
     var rows = await conn.query(query);
     res.send(rows);
   } catch (err) {
