@@ -38,7 +38,10 @@ const userStore = {
   },
 
   addSensor(loggedInUser, sensor) {
-    let user = this.store.findOneBy(this.collection, { id: loggedInUser })
+    let user = this.store.findOneBy(this.collection, { id: loggedInUser.id })
+    if (!user.sensors) {
+      user.sensors = [];
+    }
     user.sensors.push(sensor);
     this.store.save();
   },

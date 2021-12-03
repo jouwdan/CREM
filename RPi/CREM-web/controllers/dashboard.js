@@ -12,6 +12,9 @@ const dashboard = {
             logger.info("Logged in user: " + loggedInUser.email);
             logger.info("Rendering Dashboard");
             let userSensors = userStore.getUserSensors(loggedInUser.id);
+            for(let i = 0; i < userSensors.length; i++) {
+                latestReading = null;
+            }
             const viewData = {
                 title: "CREM | Dashboard",
                 loggedInUser: loggedInUser,
@@ -24,11 +27,8 @@ const dashboard = {
     },
     addSensor(request, response) {
         const loggedInUser = account.getCurrentUser(request);
-        const newSensor = {
-          userid: loggedInUser.id,
-          sensor: request.body.sensor,
-        };
-        userStore.addSensor(newSensor);
+        const sensor = request.body.sensor;
+        userStore.addSensor(loggedInUser, sensor);
         response.redirect("/dashboard");
       },
 };
