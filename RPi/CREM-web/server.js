@@ -25,7 +25,7 @@ app.set("view engine", ".hbs");
 const routes = require("./routes");
 app.use("/", routes);
 
-app.get('/api/:sensor/all', async (req, res) => {
+app.get('/api/all/:sensor', async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
@@ -39,7 +39,7 @@ app.get('/api/:sensor/all', async (req, res) => {
   }
 });
 
-app.get('/api/:sensor/latest', async (req, res) => {
+app.get('/api/latest/:sensor', async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();

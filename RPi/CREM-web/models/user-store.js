@@ -2,6 +2,7 @@
 
 const _ = require("lodash");
 const JsonStore = require("./json-store");
+const pool = require("../utils/db");
 
 const userStore = {
   store: new JsonStore("./models/user-store.json", { users: [] }),
