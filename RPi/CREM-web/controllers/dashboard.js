@@ -3,7 +3,7 @@
 const logger = require("../utils/logger");
 const userStore = require("../models/user-store");
 const account = require("./account");
-const fetch = require('node-fetch');
+const readingutil = require("../utils/readingutil");
 
 const dashboard = {
     index(request, response) {
@@ -13,17 +13,8 @@ const dashboard = {
             let userSensors = userStore.getUserSensors(loggedInUser.id);
             logger.info(userSensors);
             let latestReadings = [];
-            userSensors.forEach(sensor => {
-                async function getLatestReadings() {
-                    logger.info("sensor: " + sensor);
-                    const response = await fetch('http://localhost:4000/api/latest/' + sensor);
-                    const latestReading = await response.json();
-                    logger.info("Latest Reading: " + JSON.stringify(latestReading));
-                    latestReadings.push(JSON.stringify(latestReading));
-                    logger.info("All Latest Readings: " + latestReadings);
-                }
-                getLatestReadings();
-            });
+            latestReadings.push(readingutil.getLatestReadings(userSensors));
+            logger.info("All Latest Readings: " + latestReadings);
             const viewData = {
                 title: "CREM | Dashboard",
                 loggedInUser: loggedInUser,
