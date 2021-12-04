@@ -14,16 +14,16 @@ const dashboard = {
             logger.info(userSensors);
             let latestReadings = [];
             userSensors.forEach(sensor => {
-                const getLatestReadings = async () => {
+                async function getLatestReadings() {
                     logger.info("sensor: " + sensor);
                     const response = await fetch('http://localhost:4000/api/latest/' + sensor);
                     const latestReading = await response.json();
                     logger.info("Latest Reading: " + JSON.stringify(latestReading));
                     latestReadings.push(JSON.stringify(latestReading));
+                    logger.info("All Latest Readings: " + latestReadings);
                 }
                 getLatestReadings();
             });
-            logger.info("All Latest Readings: " + latestReadings);
             const viewData = {
                 title: "CREM | Dashboard",
                 loggedInUser: loggedInUser,
