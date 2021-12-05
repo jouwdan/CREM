@@ -4,20 +4,12 @@ const fetch = require('node-fetch');
 const http = require('http');
 
 const weatherUtil = {
-    getLatestReadings(sensors) {
+    async getLatestReadings(sensors) {
         var latestReadings = [];
         for(let sensor of sensors) {
-            http.get('http://localhost:4000/api/latest/' + sensor, (res) => {
-                let data = '';
-                res.on('data', (chunk) => {
-                    data += chunk;
-                });
-                res.on('end', () => {
-                    data = JSON.parse(data);
-                    latestReadings.push(data);
-                    console.log(latestReadings);
-                });
-            });
+            let response = await fetch('http://localhost:4000/api/latest/' + sensor);
+            let reading = await response.json();
+            latestReadings.push(reading);
         };
         return latestReadings;
     },

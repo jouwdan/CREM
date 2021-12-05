@@ -12,14 +12,15 @@ const dashboard = {
             logger.info("Logged in user: " + loggedInUser.email);
             let userSensors = userStore.getUserSensors(loggedInUser.id);
             logger.info(userSensors);
-            let latestReadings = [];
-            latestReadings.push(readingutil.getLatestReadings(userSensors));
-            logger.info("All Latest Readings: " + latestReadings);
+            let readings = readingutil.getLatestReadings(userSensors)
+                .then(readings => {
+                    logger.info("All Latest Readings: " + (JSON.stringify(readings)));
+                })
             const viewData = {
                 title: "CREM | Dashboard",
                 loggedInUser: loggedInUser,
                 sensors: userSensors,
-                latest: latestReadings,
+                latest: readings,
             };
             logger.info("Rendering Dashboard");
             response.render("dashboard", viewData);
