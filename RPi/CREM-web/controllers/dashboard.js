@@ -15,15 +15,15 @@ const dashboard = {
             let readings = readingutil.getLatestReadings(userSensors)
                 .then(readings => {
                     logger.info("All Latest Readings: " + (JSON.stringify(readings)));
+                    const viewData = {
+                        title: "CREM | Dashboard",
+                        loggedInUser: loggedInUser,
+                        sensors: userSensors,
+                        latest: readings,
+                    };
+                    logger.info("Rendering Dashboard");
+                    response.render("dashboard", viewData);
                 })
-            const viewData = {
-                title: "CREM | Dashboard",
-                loggedInUser: loggedInUser,
-                sensors: userSensors,
-                latest: readings,
-            };
-            logger.info("Rendering Dashboard");
-            response.render("dashboard", viewData);
         } else {
             response.redirect("/login");
         }

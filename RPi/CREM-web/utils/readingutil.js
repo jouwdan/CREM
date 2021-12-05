@@ -9,7 +9,8 @@ const weatherUtil = {
         for(let sensor of sensors) {
             let response = await fetch('http://localhost:4000/api/latest/' + sensor);
             let reading = await response.json();
-            latestReadings.push(reading);
+            let concatArray = latestReadings.concat(reading);
+            latestReadings = concatArray;
         };
         return latestReadings;
     },
