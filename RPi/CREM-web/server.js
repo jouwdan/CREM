@@ -53,6 +53,48 @@ app.get('/api/latest/:sensor', async (req, res) => {
   }
 });
 
+app.get('/api/day/:sensor', async (req, res) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    var query = "SELECT * FROM readings WHERE sensor = '" + req.params.sensor + "' AND timestamp >= CURDATE() ORDER BY readingid DESC";
+    var rows = await conn.query(query);
+    res.send(rows);
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) return conn.release();
+  }
+});
+
+app.get('/api/day/:sensor/high/temp', async (req, res) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    var query = "SELECT * FROM readings WHERE sensor = '" + req.params.sensor + "' AND timestamp >= CURDATE() ORDER BY reading DESC LIMIT 1";
+    var rows = await conn.query(query);
+    res.send(rows);
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) return conn.release();
+  }
+});
+
+app.get('/api/day/:sensor/low/temp', async (req, res) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    var query = "SELECT * FROM readings WHERE sensor = '" + req.params.sensor + "' AND timestamp >= CURDATE() ORDER BY reading ASC LIMIT 1";
+    var rows = await conn.query(query);
+    res.send(rows);
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) return conn.release();
+  }
+});
+
 const listener = app.listen(process.env.PORT || 4000, function() {
   logger.info(`CREM web app started on port ${listener.address().port}`);
 });

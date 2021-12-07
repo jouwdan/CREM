@@ -14,6 +14,16 @@ const weatherUtil = {
         };
         return latestReadings;
     },
+    async getDailyHighTemp(sensor) {
+        let response = await fetch ('http://localhost:4000/api/day/' + sensor + '/high/temp');
+        let reading = await response.json();
+        return reading;
+    },
+    async getDailyLowTemp(sensor) {
+        let response = await fetch ('http://localhost:4000/api/day/' + sensor + '/low/temp');
+        let reading = await response.json();
+        return reading;
+    },
 };
 
 module.exports = weatherUtil;

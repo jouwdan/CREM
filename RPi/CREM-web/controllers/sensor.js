@@ -14,15 +14,22 @@ const sensor = {
         let latestReading = readingutil.getLatestReadings(sensorArray)
             .then(latestReading => {
                 logger.info("Latest Reading: " + (JSON.stringify(latestReading)));
-
-                const viewData = {
-                    title: "CREM | " + sensorName,
-                    loggedInUser: loggedInUser,
-                    sensor: sensorName,
-                    latest: latestReading
-                };
-                logger.info("Rendering Sensor " + sensorName);
-                response.render("sensor", viewData);
+                let dailyHighTemp = readingutil.getDailyHighTemp(sensorName)
+                .then(dailyHighTemp => {
+                    let dailyLowTemp = readingutil.getDailyLowTemp(sensorName)
+                    .then(dailyLowTemp => {
+                        const viewData = {
+                            title: "CREM | " + sensorName,
+                            loggedInUser: loggedInUser,
+                            sensor: sensorName,
+                            latest: latestReading,
+                            dailyHighTemp: dailyHighTemp,
+                            dailyLowTemp: dailyLowTemp
+                        };
+                        logger.info("Rendering Sensor " + sensorName);
+                        response.render("sensor", viewData);
+                    });  
+                });
             });
         } else {
             response.redirect("/login");
