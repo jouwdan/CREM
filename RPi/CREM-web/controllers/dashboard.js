@@ -33,7 +33,13 @@ const dashboard = {
         const sensor = request.body.sensor;
         userStore.addSensor(loggedInUser, sensor);
         response.redirect("/dashboard");
-      },
+    },
+    deleteSensor(request, response) {
+        const loggedInUser = account.getCurrentUser(request);
+        const selectedSensor = request.params.id;
+        userStore.removeSensor(loggedInUser, selectedSensor);
+        response.redirect("/dashboard");
+    },
 };
 
 module.exports = dashboard;

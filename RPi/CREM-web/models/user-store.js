@@ -47,6 +47,17 @@ const userStore = {
     this.store.save();
   },
 
+  removeSensor(loggedInUser, sensor) {
+    let user = this.store.findOneBy(this.collection, { id: loggedInUser.id })
+    const array = user.sensors;
+    const index = array.indexOf(sensor);
+    if (index > -1) {
+      array.splice(index, 1);
+    }
+    user.sensors = array;
+    this.store.save();
+  },
+
   getUserSensors(loggedInUser) {
     let user = this.store.findOneBy(this.collection, { id: loggedInUser });
     return user.sensors;
