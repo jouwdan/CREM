@@ -24,8 +24,13 @@ const weatherUtil = {
         let reading = await response.json();
         return reading;
     },
-    async getLastDay(sensor, time) {
+    async getLastDay(sensor) {
         let response = await fetch ('http://localhost:4000/api/day/' + sensor);
+        let reading = await response.json();
+        return reading;
+    },
+    async getRecentAlerts(sensor) {
+        let response = await fetch ('http://localhost:4000/api/alerts/' + sensor);
         let reading = await response.json();
         return reading;
     },

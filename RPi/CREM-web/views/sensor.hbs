@@ -6,7 +6,7 @@
   {{#each latest}}
 <div class="card bg-base-100 flex-auto p-4 m-2">
   <h2 class="text-xl">Latest Reading</h2>
-  <p>Timestamp: {{timestamp}}</p>
+  <p>Timestamp: {{prettifyDate timestamp}}</p>
   <p>Temperature: {{reading}}°C</p>
   <p>Humidity: {{humidity}}%</p>
 </div>
@@ -18,7 +18,12 @@
 </div>
 <div class="card bg-base-100 flex-auto p-4 m-2">
   <h2 class="text-xl">Recent Alerts</h2>
+  {{#each recentAlerts}}
+  <p>{{reading}}°C at {{prettifyDate timestamp}}</p>
+  {{/each}}
+  {{#unless recentAlerts}}
   <p>None!</p>
+  {{/unless}}
 </div>
 </div>
 </div>
@@ -29,7 +34,7 @@
   const data = {
     labels: [
       {{#each lastDay}}
-        "{{prettifyDate timestamp}}",
+        "{{prettifyDateTime timestamp}}",
       {{/each}}
     ],
     datasets: [

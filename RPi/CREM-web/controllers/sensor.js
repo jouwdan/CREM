@@ -20,17 +20,21 @@ const sensor = {
                     .then(dailyLowTemp => {
                         let lastDay = readingutil.getLastDay(sensorName)
                         .then(lastDay => { 
-                            const viewData = {
-                                title: "CREM | " + sensorName,
-                                loggedInUser: loggedInUser,
-                                sensor: sensorName,
-                                latest: latestReading,
-                                dailyHighTemp: dailyHighTemp,
-                                dailyLowTemp: dailyLowTemp,
-                                lastDay: lastDay,
-                            };
-                            logger.info("Rendering Sensor " + sensorName);
-                            response.render("sensor", viewData);
+                            let recentAlerts = readingutil.getRecentAlerts(sensorName)
+                            .then (recentAlerts => {
+                                const viewData = {
+                                    title: "CREM | " + sensorName,
+                                    loggedInUser: loggedInUser,
+                                    sensor: sensorName,
+                                    latest: latestReading,
+                                    dailyHighTemp: dailyHighTemp,
+                                    dailyLowTemp: dailyLowTemp,
+                                    lastDay: lastDay,
+                                    recentAlerts: recentAlerts,
+                                };
+                                logger.info("Rendering Sensor " + sensorName);
+                                response.render("sensor", viewData);
+                            });
                         });
                     });  
                 });

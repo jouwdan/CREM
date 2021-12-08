@@ -19,8 +19,11 @@ app.engine(
     extname: ".hbs",
     defaultLayout: "main",
     helpers: {
-      prettifyDate: function(timestamp) {
+      prettifyDateTime: function(timestamp) {
         return new Date(timestamp).toTimeString()
+      },
+      prettifyDate: function(timestamp) {
+        return new Date(timestamp).toUTCString()
       },
     },
   })
@@ -91,6 +94,20 @@ app.get('/api/day/:sensor/low/temp', async (req, res) => {
   try {
     conn = await pool.getConnection();
     var query = "SELECT * FROM readings WHERE sensor = '" + req.params.sensor + "' AND timestamp >= CURDATE() ORDER BY reading ASC LIMIT 1";
+    var rows = await conn.query(query);
+    res.send(rows);
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) return conn.release();
+  }
+});
+
+app.get('/api/alerts/:sensor', async (req, res) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    var query = "SELECT * FROM readings WHERE sensor = '" + req.params.sensor + "' AND (reading >= 30) OR (reading <= 10) ORDER BY readingid DESC LIMIT 3";
     var rows = await conn.query(query);
     res.send(rows);
   } catch (err) {
