@@ -34,7 +34,7 @@ def get_readings():
             print('Published Successfully')
         except OSError:
             print('Sensor reading failed')
-        sleep(5)
+        sleep(60)
 
 do_connect()
 get_readings()
