@@ -43,7 +43,16 @@
     title: "Today's Temperature Trend",
     data: data,
     type: 'line',
+    axisOptions: {
+      xIsSeries: true,
+      xAxisMode: 'tick'
+    },
     height: 250,
+    lineOptions: {
+      hideDots: 1,
+      regionFill: 1,
+      spline: 1
+    },
   })
 </script>
 </div>

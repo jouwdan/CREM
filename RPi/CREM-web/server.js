@@ -20,7 +20,7 @@ app.engine(
     defaultLayout: "main",
     helpers: {
       prettifyDate: function(timestamp) {
-        return new Date(timestamp).toString('dd-MM-yyyy HH:MM:ss')
+        return new Date(timestamp).toTimeString()
       },
     },
   })
