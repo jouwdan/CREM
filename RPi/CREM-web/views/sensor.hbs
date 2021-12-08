@@ -18,3 +18,32 @@
 </div>
 </div>
 </div>
+
+<div class="container bg-base-200 rounded-box rounded-xl p-4 mb-4">
+  <div class="ui segment" id="chart"></div>
+<script>
+  const data = {
+    labels: [
+      {{#each lastDay}}
+        "{{prettifyDate timestamp}}",
+      {{/each}}
+    ],
+    datasets: [
+      {
+        name: "Temperature", type: "line",
+        values: [
+          {{#each lastDay}}
+            {{reading}},
+          {{/each}}
+        ]
+      }
+    ]
+  }
+  const chart = new frappe.Chart("#chart", {
+    title: "Today's Temperature Trend",
+    data: data,
+    type: 'line',
+    height: 250,
+  })
+</script>
+</div>

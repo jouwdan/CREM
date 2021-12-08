@@ -17,7 +17,12 @@ app.engine(
   ".hbs",
   exphbs({
     extname: ".hbs",
-    defaultLayout: "main"
+    defaultLayout: "main",
+    helpers: {
+      prettifyDate: function(timestamp) {
+        return new Date(timestamp).toString('dd-MM-yyyy HH:MM:ss')
+      },
+    },
   })
 );
 app.set("view engine", ".hbs");
@@ -57,7 +62,7 @@ app.get('/api/day/:sensor', async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
-    var query = "SELECT * FROM readings WHERE sensor = '" + req.params.sensor + "' AND timestamp >= CURDATE() ORDER BY readingid DESC";
+    var query = "SELECT * FROM readings WHERE sensor = '" + req.params.sensor + "' AND timestamp >= CURDATE() ORDER BY readingid ASC";
     var rows = await conn.query(query);
     res.send(rows);
   } catch (err) {

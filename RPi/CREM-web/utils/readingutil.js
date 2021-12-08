@@ -24,6 +24,11 @@ const weatherUtil = {
         let reading = await response.json();
         return reading;
     },
+    async getLastDay(sensor, time) {
+        let response = await fetch ('http://localhost:4000/api/day/' + sensor);
+        let reading = await response.json();
+        return reading;
+    },
 };
 
 module.exports = weatherUtil;
