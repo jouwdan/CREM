@@ -1,6 +1,6 @@
 # CREM - Comms Room Environment Monitor
 
-CREM, or Comms Room Environment Monitor, is an experimental website hosted on a Raspberry Pi which is used to monitor, log and alert temperature & humidity changes in one or multiple comms rooms by connecting wirelessly to DHT22 temperature sensors attached to ESP32 NodeMCU boards. A web interface is used to view sensor data, and a python script is running in the background monitoring and logging the temperature - and will send a mail when the temperature reaches a certain threshold.
+CREM, or Comms Room Environment Monitor, is a project hosted on a Raspberry Pi which is used to monitor, log and alert temperature & humidity changes in one or multiple comms rooms by connecting via MQTT to DHT22 temperature sensors attached to ESP32 NodeMCU boards. A web interface is used to view sensor data, and a python script is running in the background monitoring and logging the temperature - and will send a mail when the temperature reaches a certain threshold.
 
 ## Technologies Used
 
